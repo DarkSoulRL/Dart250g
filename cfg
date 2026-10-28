@@ -1,8 +1,6 @@
-!CfgFileCrc:11a7d9c3
 !Software Version V200R021C00SPC200
-!Last configuration was updated at 2026-10-28 08:40:17 UTC by administrator
-!Last configuration was saved at 2026-10-28 09:39:03 UTC by administrator
-!MKHash 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+!Last configuration was updated at 2026-10-28 16:07:02+04:00 by administrator
+!Last configuration was saved at 2026-10-28 16:07:25+04:00 by administrator
 #
 clock timezone ULN add 04:00:00
 #
@@ -98,11 +96,11 @@ vlan 959
 dhcp server request-packet all-interface enable
 #
 aaa
- undo local-user policy security-enhance
- local-user administrator password irreversible-cipher ***
+ local-user authentication lock times 5 3
+ local-user administrator password irreversible-cipher $1c$*PBhCZL,<N$`Qdc;#c/[B{fS&&`XXf2H8d"LI'8vKGHK&I)J``V$
  local-user administrator service-type ssh
  local-user administrator level 3
- local-user rancid password irreversible-cipher ***
+ local-user rancid password irreversible-cipher $1c$gTE\%LT*}8$)iAL#u,0W!kpbqAa(MWA0D1FDfiKuH;*K(NdVq31$
  local-user rancid service-type ssh
  local-user rancid level 3
  #
@@ -517,21 +515,25 @@ interface 10GE2/0/21
  description dell3020-iscsi-2-1-top
  port link-type trunk
  port trunk allow-pass vlan 702
+ stp disable
 #
 interface 10GE2/0/22
  description dell3020-iscsi-2-2-top
  port link-type trunk
  port trunk allow-pass vlan 702
+ stp disable
 #
 interface 10GE2/0/23
  description dell3020-iscsi-2-1-bottom
  port link-type trunk
  port trunk allow-pass vlan 702
+ stp disable
 #
 interface 10GE2/0/24
  description dell3020-iscsi-2-2-bottom
  port link-type trunk
  port trunk allow-pass vlan 702
+ stp disable
 #
 interface 10GE2/0/25
  description 7
@@ -618,19 +620,19 @@ interface 10GE2/0/48
  eth-trunk 30
 #
 interface 100GE1/0/1
- port mode stack 
+ port mode stack
  stack-port 1/1
  port crc-statistics trigger error-down
  device transceiver 100GBASE-COPPER
 #
 interface 100GE1/0/2
- port mode stack 
+ port mode stack
  stack-port 1/1
  port crc-statistics trigger error-down
  device transceiver 100GBASE-COPPER
 #
 interface 100GE1/0/3
- port mode stack 
+ port mode stack
  stack-port 1/1
  port crc-statistics trigger error-down
  device transceiver 100GBASE-COPPER
@@ -642,19 +644,19 @@ interface 100GE1/0/5
 interface 100GE1/0/6
 #
 interface 100GE2/0/1
- port mode stack 
+ port mode stack
  stack-port 2/1
  port crc-statistics trigger error-down
  device transceiver 100GBASE-COPPER
 #
 interface 100GE2/0/2
- port mode stack 
+ port mode stack
  stack-port 2/1
  port crc-statistics trigger error-down
  device transceiver 100GBASE-COPPER
 #
 interface 100GE2/0/3
- port mode stack 
+ port mode stack
  stack-port 2/1
  port crc-statistics trigger error-down
 #
@@ -670,14 +672,14 @@ ip route-static 0.0.0.0 0.0.0.0 172.23.155.1
 #
 snmp-agent
 snmp-agent local-engineid 800007DB03C4E287EACD51
-snmp-agent community read cipher ***
-snmp-agent community read cipher ***
+snmp-agent community read cipher %^%#\tl_X_%g3J+*%JA}aB-B]WS[C+Ac|REYn!M^pxu5p\On'r_|$FI2E6$sb#h=EhgeA!yvw/o5Y)<6oqS3%^%# alias __CommunityAliasName_01_7422
+snmp-agent community read cipher %^%#wGSFMRljv._I5RDK{s0OTz486hQ);A_`Z#Q2u:WO"v6pPHd-RW#V$NJj3|j6U&GdA:Z1f91g:&/!iYI&%^%# alias __CommunityAliasName_02_43921
 #
 snmp-agent sys-info contact Andrey Garkin
 snmp-agent sys-info location UlyanovskEnergo
 snmp-agent sys-info version v2c v3
 snmp-agent community complexity-check disable
-snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher ***
+snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher %^%#Wqu%A8v&33#4]zAvx&g(uraP3y_5"PTEz3I-`k'U%^%# v2c
 #
 snmp-agent protocol source-status all-interface
 undo snmp-agent protocol source-status ipv6 all-interface
@@ -693,6 +695,7 @@ stelnet server enable
 ssh user administrator
 ssh user administrator authentication-type password
 ssh user administrator service-type stelnet
+ssh server-source -i Vlanif666
 ssh server-source all-interface
 undo ssh ipv6 server-source all-interface
 ssh server ip-block disable
@@ -719,7 +722,7 @@ command alias
 #
 user-interface con 0
  authentication-mode password
- set authentication password cipher ***
+ set authentication password cipher $1c$8aeh>^|ADT$VMQs('+YF)kV0#@W%fxU|%G$<}1P^$EJV%>tdS>+$
 #
 user-interface vty 0 4
  authentication-mode aaa
