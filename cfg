@@ -1,0 +1,733 @@
+!CfgFileCrc:11a7d9c3
+!Software Version V200R021C00SPC200
+!Last configuration was updated at 2026-10-28 08:40:17 UTC by administrator
+!Last configuration was saved at 2026-10-28 09:39:03 UTC by administrator
+!MKHash 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+#
+clock timezone ULN add 04:00:00
+#
+sysname cod1-stoyka1-1
+#
+undo ftp server source all-interface
+undo ftp ipv6 server source all-interface
+#
+info-center source default channel 4 log state off
+info-center source default channel 9 log state off
+#
+device board 1 board-type CE6881-48T6CQ
+device board 2 board-type CE6881-48T6CQ
+#
+drop-profile default
+#
+dcb pfc
+#
+ntp ipv6 server disable
+ntp server source-interface all disable
+ntp ipv6 server source-interface all disable
+ntp unicast-server 172.23.156.1
+#
+vlan batch 12 100 to 101 105 113 to 116 198 to 200 666 to 667 701 to 702 711 to 712 888 956
+vlan batch 959
+#
+dhcp snooping enable
+#
+icmp name timestamp-reply send disable
+#
+telnet server disable
+telnet ipv6 server disable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+vlan 12
+ name trunk_core-Ideco_ISUE
+#
+vlan 100
+#
+vlan 101
+ name local1
+#
+vlan 105
+ name ISUE
+#
+vlan 113
+ name karantin
+#
+vlan 114
+ name WIFI
+#
+vlan 115
+ name WiFiSystem
+#
+vlan 116
+ name TEP_GEN
+#
+vlan 198
+#
+vlan 199
+ name Printers
+#
+vlan 200
+#
+vlan 666
+ name managment
+#
+vlan 667
+ name management_ISUE
+#
+vlan 701
+ name ISCSI1
+#
+vlan 702
+ name ISCSI2
+#
+vlan 711
+ name ISCSI1-711
+#
+vlan 712
+ name ISCSI1-712
+#
+vlan 888
+#
+vlan 956
+ name Tele2-OISUE
+#
+vlan 959
+#
+dhcp server request-packet all-interface enable
+#
+aaa
+ undo local-user policy security-enhance
+ local-user administrator password irreversible-cipher ***
+ local-user administrator service-type ssh
+ local-user administrator level 3
+ local-user rancid password irreversible-cipher ***
+ local-user rancid service-type ssh
+ local-user rancid level 3
+ #
+ authentication-scheme default
+ #
+ authorization-scheme default
+ #
+ accounting-scheme default
+ #
+ domain default
+ #
+ domain default_admin
+#
+stack
+ #
+ stack member 1 domain 1
+ stack member 1 priority 150
+ #
+ stack member 2 domain 1
+ stack member 2 priority 120
+#
+license
+#
+interface Vlanif105
+#
+interface Vlanif666
+ ip address 172.23.155.34 255.255.255.0
+#
+interface MEth0/0/0
+#
+interface Eth-Trunk1
+ description vs1-lan1-172.23.155.51
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-static
+ lacp preempt enable
+ lacp preempt delay 10
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk2
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-static
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk3
+ description vs3-lan1-172.23.155.53
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk4
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk5
+ description vs5-lan1-172.23.155.55
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk6
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk7
+ description vs7-lan1-172.23.155.57
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk8
+ description vmware_host_58
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk9
+ port default vlan 100
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk10
+ description vmware_host_59
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-dynamic
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk30
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-static
+#
+interface Eth-Trunk31
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ mode lacp-static
+#
+interface Stack-Port1/1
+#
+interface Stack-Port2/1
+#
+interface 10GE1/0/1
+ description vs1-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/2
+ description IBM-node-1
+ port default vlan 666
+#
+interface 10GE1/0/3
+ description vs3-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/4
+ description vs4-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/5
+ description vs5-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/6
+ description vs1-cl4-iscsi-1-10GB-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/7
+ description vs7-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/8
+ description vs8-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/9
+ description vs9-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/10
+ port link-type trunk
+ port trunk allow-pass vlan 701
+#
+interface 10GE1/0/11
+ description vs1-lan1-172.23.155.51
+ eth-trunk 1
+#
+interface 10GE1/0/12
+ description vs2-cl4-lan1-155.77
+ eth-trunk 2
+#
+interface 10GE1/0/13
+ description vs3-lan1-172.23.155.53
+ eth-trunk 3
+#
+interface 10GE1/0/14
+ description vs4-lan1
+ eth-trunk 4
+#
+interface 10GE1/0/15
+ description vs5-lan1-172.23.155.55
+ eth-trunk 5
+#
+interface 10GE1/0/16
+ description vs1-cl4-lan1-155.76
+ eth-trunk 6
+#
+interface 10GE1/0/17
+ description vs7-lan1-172.23.155.57
+ eth-trunk 7
+#
+interface 10GE1/0/18
+ description vs8-lan2-vmnic5
+ eth-trunk 8
+#
+interface 10GE1/0/19
+ description 1C-srv-2-lan1
+ eth-trunk 9
+#
+interface 10GE1/0/20
+ description vs2-cl9-lan1-155.59 vmnic2
+ eth-trunk 10
+#
+interface 10GE1/0/21
+ description dell3020-iscsi-1-1-top
+ port link-type trunk
+ port trunk allow-pass vlan 701
+ stp disable
+#
+interface 10GE1/0/22
+ description dell3020-iscsi-1-2-top
+ port link-type trunk
+ port trunk allow-pass vlan 701
+ stp disable
+#
+interface 10GE1/0/23
+ description dell3020-iscsi-1-1-bottom
+ port link-type trunk
+ port trunk allow-pass vlan 701
+ stp disable
+#
+interface 10GE1/0/24
+ description dell3020-iscsi-1-2-bottom
+ port link-type trunk
+ port trunk allow-pass vlan 701
+ stp disable
+#
+interface 10GE1/0/25
+ description 1C-db-lan
+ port default vlan 100
+#
+interface 10GE1/0/26
+ description 2
+ port default vlan 100
+#
+interface 10GE1/0/27
+ description 3
+ port default vlan 100
+#
+interface 10GE1/0/28
+ description 4
+ port default vlan 100
+#
+interface 10GE1/0/29
+ description 5
+ port default vlan 200
+#
+interface 10GE1/0/30
+ description 6
+ port default vlan 100
+#
+interface 10GE1/0/31
+ description m-dell3020-head1
+ port default vlan 666
+#
+interface 10GE1/0/32
+ description m-virt-1
+ port default vlan 666
+#
+interface 10GE1/0/33
+ description m-virt-3
+ port default vlan 666
+#
+interface 10GE1/0/34
+ description m-virt-5
+ port default vlan 666
+#
+interface 10GE1/0/35
+ description m-virt-7
+ port default vlan 666
+#
+interface 10GE1/0/36
+ description m-virt-8
+ port default vlan 666
+#
+interface 10GE1/0/37
+ description UPS1
+ port default vlan 100
+#
+interface 10GE1/0/38
+ description UPS1-rozetka
+ port default vlan 666
+#
+interface 10GE1/0/39
+ description 1C-srv-2-mng
+ port default vlan 666
+#
+interface 10GE1/0/40
+ port default vlan 666
+#
+interface 10GE1/0/41
+ description mrsk-kvm
+ port default vlan 666
+#
+interface 10GE1/0/42
+#
+interface 10GE1/0/43
+#
+interface 10GE1/0/44
+#
+interface 10GE1/0/45
+#
+interface 10GE1/0/46
+ description trunk-to-HPE--Stoyka3-2floor
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 999
+ jumboframe enable 10000
+#
+interface 10GE1/0/47
+ description trunk-to-HPE
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+#
+interface 10GE1/0/48
+ description trunk-to-core
+ eth-trunk 30
+#
+interface 10GE2/0/1
+ description vs1-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/2
+ description IBM-node-2
+ port default vlan 666
+#
+interface 10GE2/0/3
+ description vs3-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/4
+ description vs4-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/5
+ description vs5-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/6
+ description vs1-cl4-iscsi-2-10GB-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/7
+ description vs7-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/8
+ description vs8-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/9
+ description vs9-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/10
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/11
+ description vs1-lan1-172.23.155.51
+ eth-trunk 1
+#
+interface 10GE2/0/12
+ description vs2-cl4-lan2-155.77
+ eth-trunk 2
+#
+interface 10GE2/0/13
+ description vs3-lan1-172.23.155.53
+ eth-trunk 3
+#
+interface 10GE2/0/14
+ eth-trunk 4
+#
+interface 10GE2/0/15
+ description vs5-lan1-172.23.155.55
+ eth-trunk 5
+#
+interface 10GE2/0/16
+ description vs1-cl4-lan2-155.76
+ eth-trunk 6
+#
+interface 10GE2/0/17
+ description vs7-lan1-172.23.155.57
+ eth-trunk 7
+#
+interface 10GE2/0/18
+ description vs8-lan2-vmnic0
+ eth-trunk 8
+#
+interface 10GE2/0/19
+ description 1C-srv-2-lan2
+ eth-trunk 9
+#
+interface 10GE2/0/20
+ description vs2-cl9-lan2-155.59 vmnic6
+ eth-trunk 10
+#
+interface 10GE2/0/21
+ description dell3020-iscsi-2-1-top
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/22
+ description dell3020-iscsi-2-2-top
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/23
+ description dell3020-iscsi-2-1-bottom
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/24
+ description dell3020-iscsi-2-2-bottom
+ port link-type trunk
+ port trunk allow-pass vlan 702
+#
+interface 10GE2/0/25
+ description 7
+ port default vlan 100
+#
+interface 10GE2/0/26
+ description USB-over-IP
+ port default vlan 666
+#
+interface 10GE2/0/27
+ description 9
+ port default vlan 100
+#
+interface 10GE2/0/28
+ description 10
+ port default vlan 100
+#
+interface 10GE2/0/29
+ description 11
+ port default vlan 100
+#
+interface 10GE2/0/30
+ description IBM-2-2
+ port default vlan 666
+#
+interface 10GE2/0/31
+ description m-dell3020-head2
+ port default vlan 666
+#
+interface 10GE2/0/32
+ description m-virt-2
+ port default vlan 666
+#
+interface 10GE2/0/33
+ description m-virt-4
+ port default vlan 666
+#
+interface 10GE2/0/34
+ description m-virt-6
+ port default vlan 666
+#
+interface 10GE2/0/35
+ description m-1c-db
+ port default vlan 666
+#
+interface 10GE2/0/36
+ description monitor-srv
+ port default vlan 666
+#
+interface 10GE2/0/37
+ description UPS2
+ port default vlan 666
+#
+interface 10GE2/0/38
+ description UPS2-rozetka
+ port default vlan 666
+#
+interface 10GE2/0/39
+ port default vlan 666
+#
+interface 10GE2/0/40
+ port default vlan 666
+#
+interface 10GE2/0/41
+ description 8
+ port default vlan 100
+#
+interface 10GE2/0/42
+#
+interface 10GE2/0/43
+#
+interface 10GE2/0/44
+#
+interface 10GE2/0/45
+#
+interface 10GE2/0/46
+ shutdown
+#
+interface 10GE2/0/47
+ eth-trunk 31
+#
+interface 10GE2/0/48
+ description trunk-to-core
+ eth-trunk 30
+#
+interface 100GE1/0/1
+ port mode stack 
+ stack-port 1/1
+ port crc-statistics trigger error-down
+ device transceiver 100GBASE-COPPER
+#
+interface 100GE1/0/2
+ port mode stack 
+ stack-port 1/1
+ port crc-statistics trigger error-down
+ device transceiver 100GBASE-COPPER
+#
+interface 100GE1/0/3
+ port mode stack 
+ stack-port 1/1
+ port crc-statistics trigger error-down
+ device transceiver 100GBASE-COPPER
+#
+interface 100GE1/0/4
+#
+interface 100GE1/0/5
+#
+interface 100GE1/0/6
+#
+interface 100GE2/0/1
+ port mode stack 
+ stack-port 2/1
+ port crc-statistics trigger error-down
+ device transceiver 100GBASE-COPPER
+#
+interface 100GE2/0/2
+ port mode stack 
+ stack-port 2/1
+ port crc-statistics trigger error-down
+ device transceiver 100GBASE-COPPER
+#
+interface 100GE2/0/3
+ port mode stack 
+ stack-port 2/1
+ port crc-statistics trigger error-down
+#
+interface 100GE2/0/4
+#
+interface 100GE2/0/5
+#
+interface 100GE2/0/6
+#
+interface NULL0
+#
+ip route-static 0.0.0.0 0.0.0.0 172.23.155.1
+#
+snmp-agent
+snmp-agent local-engineid 800007DB03C4E287EACD51
+snmp-agent community read cipher ***
+snmp-agent community read cipher ***
+#
+snmp-agent sys-info contact Andrey Garkin
+snmp-agent sys-info location UlyanovskEnergo
+snmp-agent sys-info version v2c v3
+snmp-agent community complexity-check disable
+snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher ***
+#
+snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+#
+lldp enable
+#
+stelnet server enable
+ssh user administrator
+ssh user administrator authentication-type password
+ssh user administrator service-type stelnet
+ssh server-source all-interface
+undo ssh ipv6 server-source all-interface
+ssh server ip-block disable
+ssh authorization-type default aaa
+#
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256
+#
+ssh server publickey rsa_sha2_256 rsa_sha2_512
+#
+ssh server dh-exchange min-len 3072
+#
+ssh client publickey rsa_sha2_256 rsa_sha2_512
+#
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256
+#
+command alias
+ alias exit command quit
+ alias no command undo
+ alias sh command display
+#
+user-interface con 0
+ authentication-mode password
+ set authentication password cipher ***
+#
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 3
+ protocol inbound ssh
+#
+port-group Eth-Trunk1-10
+#
+warranty
+#
+return
