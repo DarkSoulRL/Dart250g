@@ -97,10 +97,10 @@ dhcp server request-packet all-interface enable
 #
 aaa
  local-user authentication lock times 5 3
- local-user administrator password irreversible-cipher $1c$*PBhCZL,<N$`Qdc;#c/[B{fS&&`XXf2H8d"LI'8vKGHK&I)J``V$
+ local-user administrator password irreversible-cipher hgngh
  local-user administrator service-type ssh
  local-user administrator level 3
- local-user rancid password irreversible-cipher $1c$gTE\%LT*}8$)iAL#u,0W!kpbqAa(MWA0D1FDfiKuH;*K(NdVq31$
+ local-user rancid password irreversible-cipher $1c$
  local-user rancid service-type ssh
  local-user rancid level 3
  #
@@ -672,14 +672,14 @@ ip route-static 0.0.0.0 0.0.0.0 172.23.155.1
 #
 snmp-agent
 snmp-agent local-engineid 800007DB03C4E287EACD51
-snmp-agent community read cipher %^%#\tl_X_%g3J+*%JA}aB-B]WS[C+Ac|REYn!M^pxu5p\On'r_|$FI2E6$sb#h=EhgeA!yvw/o5Y)<6oqS3%^%# alias __CommunityAliasName_01_7422
-snmp-agent community read cipher %^%#wGSFMRljv._I5RDK{s0OTz486hQ);A_`Z#Q2u:WO"v6pPHd-RW#V$NJj3|j6U&GdA:Z1f91g:&/!iYI&%^%# alias __CommunityAliasName_02_43921
+snmp-agent community read cipher %^%
+snmp-agent community read cipher %^%#
 #
 snmp-agent sys-info contact Andrey Garkin
 snmp-agent sys-info location UlyanovskEnergo
 snmp-agent sys-info version v2c v3
 snmp-agent community complexity-check disable
-snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher %^%#Wqu%A8v&33#4]zAvx&g(uraP3y_5"PTEz3I-`k'U%^%# v2c
+snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher %^ v2c
 #
 snmp-agent protocol source-status all-interface
 undo snmp-agent protocol source-status ipv6 all-interface
@@ -722,7 +722,7 @@ command alias
 #
 user-interface con 0
  authentication-mode password
- set authentication password cipher $1c$8aeh>^|ADT$VMQs('+YF)kV0#@W%fxU|%G$<}1P^$EJV%>tdS>+$
+ set authentication password cipher $1c$
 #
 user-interface vty 0 4
  authentication-mode aaa
