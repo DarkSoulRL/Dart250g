@@ -1,6 +1,6 @@
 !Software Version V200R024C00SPC500
-!Last configuration was updated at 2026-11-15 20:30:48+04:00 by administrator
-!Last configuration was saved at 2026-11-15 20:30:56+04:00 by administrator
+!Last configuration was updated at 2026-11-16 08:56:01+04:00 by administrator
+!Last configuration was saved at 2026-11-16 08:56:57+04:00 by administrator
 #
 clock timezone ULN add 04:00:00
 #
@@ -44,6 +44,7 @@ vlan 12
  name trunk_core-Ideco_ISUE
 #
 vlan 100
+ name Servers
 #
 vlan 101
  name local1
@@ -99,10 +100,10 @@ dhcp server request-packet all-interface enable
 #
 aaa
  local-user authentication lock times 5 3
- local-user administrator password irreversible-cipher $1c$*PBhCZL,<N$`Qdc;#c/[B{fS&&`XXf2H8d"LI'8vKGHK&I)J``V$
+ local-user administrator password irreversible-cipher ***
  local-user administrator service-type ssh
  local-user administrator level 3
- local-user rancid password irreversible-cipher $1c$gTE\%LT*}8$)iAL#u,0W!kpbqAa(MWA0D1FDfiKuH;*K(NdVq31$
+ local-user rancid password irreversible-cipher ***
  local-user rancid service-type ssh
  local-user rancid level 3
  #
@@ -127,8 +128,6 @@ stack
 license
 #
 warranty
-#
-interface Vlanif105
 #
 interface Vlanif666
  ip address 172.23.155.34 255.255.255.0
@@ -183,45 +182,12 @@ interface Eth-Trunk6
  dhcp snooping enable
  dhcp snooping trusted
 #
-interface Eth-Trunk7
- port link-type trunk
- port trunk allow-pass vlan 2 to 4094
- mode lacp-static
- dhcp snooping enable
- dhcp snooping trusted
-#
-interface Eth-Trunk8
- description vmware_host_58
- port link-type trunk
- port trunk allow-pass vlan 2 to 4094
- mode lacp-dynamic
- dhcp snooping enable
- dhcp snooping trusted
-#
-interface Eth-Trunk9
- port default vlan 100
- mode lacp-dynamic
- dhcp snooping enable
- dhcp snooping trusted
-#
-interface Eth-Trunk10
- description vmware_host_59
- port link-type trunk
- port trunk allow-pass vlan 2 to 4094
- mode lacp-dynamic
- dhcp snooping enable
- dhcp snooping trusted
-#
 interface Eth-Trunk30
+ description trunk-to-core
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
  mode lacp-static
  dual-active detect mode relay
-#
-interface Eth-Trunk31
- port link-type trunk
- port trunk allow-pass vlan 2 to 4094
- mode lacp-static
 #
 interface Eth-Trunk33
  description server_1c-srv2
@@ -535,7 +501,6 @@ interface 10GE2/0/45
 interface 10GE2/0/46
 #
 interface 10GE2/0/47
- eth-trunk 31
 #
 interface 10GE2/0/48
  description trunk-to-core
@@ -554,10 +519,6 @@ interface 100GE1/0/2
  device transceiver 100GBASE-COPPER
 #
 interface 100GE1/0/3
- port mode stack
- stack-port 1/1
- port crc-statistics trigger error-down
- device transceiver 100GBASE-COPPER
 #
 interface 100GE1/0/4
 #
@@ -578,9 +539,6 @@ interface 100GE2/0/2
  device transceiver 100GBASE-COPPER
 #
 interface 100GE2/0/3
- port mode stack
- stack-port 2/1
- port crc-statistics trigger error-down
 #
 interface 100GE2/0/4
 #
@@ -596,14 +554,14 @@ ip route-static 0.0.0.0 0.0.0.0 172.23.155.1
 #
 snmp-agent
 snmp-agent local-engineid 800007DB03C4E287EACD51
-snmp-agent community read cipher %^%#\tl_X_%g3J+*%JA}aB-B]WS[C+Ac|REYn!M^pxu5p\On'r_|$FI2E6$sb#h=EhgeA!yvw/o5Y)<6oqS3%^%# alias __CommunityAliasName_01_7422
-snmp-agent community read cipher %^%#wGSFMRljv._I5RDK{s0OTz486hQ);A_`Z#Q2u:WO"v6pPHd-RW#V$NJj3|j6U&GdA:Z1f91g:&/!iYI&%^%# alias __CommunityAliasName_02_43921
+snmp-agent community read cipher *** alias __CommunityAliasName_01_7422
+snmp-agent community read cipher *** alias __CommunityAliasName_02_43921
 #
 snmp-agent sys-info contact Andrey Garkin
 snmp-agent sys-info location UlyanovskEnergo
 snmp-agent sys-info version v2c v3
 snmp-agent community complexity-check disable
-snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher %^%#Wqu%A8v&33#4]zAvx&g(uraP3y_5"PTEz3I-`k'U%^%# v2c
+snmp-agent target-host host-name __targetHost_1_22027 trap address udp-domain 172.23.155.254 params securityname cipher *** v2c
 #
 snmp-agent protocol source-status all-interface
 undo snmp-agent protocol source-status ipv6 all-interface
@@ -649,7 +607,7 @@ user-interface maximum-vty 5
 #
 user-interface con 0
  authentication-mode password
- set authentication password cipher $1c$8aeh>^|ADT$VMQs('+YF)kV0#@W%fxU|%G$<}1P^$EJV%>tdS>+$
+ set authentication password cipher ***
 #
 user-interface vty 0 4
  authentication-mode aaa
@@ -659,9 +617,6 @@ user-interface vty 0 4
 netconf
  max-sessions 5
 #
-port-group Eth-Trunk1-10
-#
 undo evpn-route-origin igp
 #
 return
-
