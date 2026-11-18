@@ -1,6 +1,6 @@
 !Software Version V200R024C00SPC500
-!Last configuration was updated at 2026-11-16 08:56:01+04:00 by administrator
-!Last configuration was saved at 2026-11-16 08:56:57+04:00 by administrator
+!Last configuration was updated at 2026-11-18 08:05:34+04:00 by administrator
+!Last configuration was saved at 2026-11-17 16:51:25+04:00 by administrator
 #
 clock timezone ULN add 04:00:00
 #
@@ -138,6 +138,7 @@ interface Eth-Trunk1
  description vs3-cl2-172.23.155.63
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
  mode lacp-static
  dhcp snooping enable
  dhcp snooping trusted
@@ -146,6 +147,7 @@ interface Eth-Trunk2
  description vs2-cl2-172.23.155.62
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
  mode lacp-static
  dhcp snooping enable
  dhcp snooping trusted
@@ -154,6 +156,7 @@ interface Eth-Trunk3
  description vs1-cl2-172.23.155.61
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
  mode lacp-static
  dhcp snooping enable
  dhcp snooping trusted
@@ -162,6 +165,7 @@ interface Eth-Trunk4
  description vs9-cl1-172.23.155.59
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
  mode lacp-static
  dhcp snooping enable
  dhcp snooping trusted
@@ -170,6 +174,7 @@ interface Eth-Trunk5
  description vs8-cl1-172.23.155.58
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
  mode lacp-static
  dhcp snooping enable
  dhcp snooping trusted
@@ -178,6 +183,34 @@ interface Eth-Trunk6
  description vs7-cl1-172.23.155.57
  port link-type trunk
  port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
+ mode lacp-static
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk13
+ description vc5-cl1-172.23.155.55
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
+ mode lacp-static
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk15
+ description vs1-cl5-172.23.155.80
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
+ mode lacp-static
+ dhcp snooping enable
+ dhcp snooping trusted
+#
+interface Eth-Trunk17
+ description vs2-cl5-172.23.155.81
+ port link-type trunk
+ port trunk allow-pass vlan 2 to 4094
+ stp edged-port enable
  mode lacp-static
  dhcp snooping enable
  dhcp snooping trusted
@@ -192,11 +225,13 @@ interface Eth-Trunk30
 interface Eth-Trunk33
  description server_1c-srv2
  port default vlan 100
+ stp edged-port enable
  mode lacp-static
 #
 interface Eth-Trunk34
  description server_1c-db
  port default vlan 100
+ stp edged-port enable
  mode lacp-static
 #
 interface Stack-Port1/1
@@ -258,20 +293,46 @@ interface 10GE1/0/12
  port trunk allow-pass vlan 701 711
 #
 interface 10GE1/0/13
+ description vc5-cl1-172.23.155.55
+ eth-trunk 13
 #
 interface 10GE1/0/14
+ description vc5-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701 711
+ stp edged-port enable
 #
 interface 10GE1/0/15
+ description vs1-cl5-172.23.155.80
+ eth-trunk 15
 #
 interface 10GE1/0/16
+ description vs1-cl5-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701 711
+ stp edged-port enable
 #
 interface 10GE1/0/17
+ description vs2-cl5-172.23.155.81
+ eth-trunk 17
 #
 interface 10GE1/0/18
+ description vs2-cl5-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701 711
+ stp edged-port enable
 #
 interface 10GE1/0/19
+ description vs1-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701 711
+ stp edged-port enable
 #
 interface 10GE1/0/20
+ description vs3-cl1-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701 711
+ stp edged-port enable
 #
 interface 10GE1/0/21
  description dell3020-iscsi-1-1-top
@@ -298,10 +359,22 @@ interface 10GE1/0/24
  stp disable
 #
 interface 10GE1/0/25
+ description dell-unity380-iscs1-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+ stp disable
 #
 interface 10GE1/0/26
+ description dell-unity380-iscs1-1
+ port link-type trunk
+ port trunk allow-pass vlan 701
+ stp disable
 #
 interface 10GE1/0/27
+ description vs1-cl4-iscsi-1
+ port link-type trunk
+ port trunk allow-pass vlan 701 711
+ stp edged-port enable
 #
 interface 10GE1/0/28
 #
@@ -315,7 +388,7 @@ interface 10GE1/0/32
 #
 interface 10GE1/0/33
  description server_1c-srv2
- eth-trunk 33
+ port default vlan 100
 #
 interface 10GE1/0/34
  description server_1c-db
@@ -347,7 +420,6 @@ interface 10GE1/0/46
  description trunk-to-HPE--Stoyka3-2floor
  port link-type trunk
  port trunk allow-pass vlan 2 to 999
- jumboframe enable 10000
 #
 interface 10GE1/0/47
  description trunk-to-HPE
@@ -413,20 +485,46 @@ interface 10GE2/0/12
  port trunk allow-pass vlan 702 712
 #
 interface 10GE2/0/13
+ description vc5-cl1-172.23.155.55
+ eth-trunk 13
 #
 interface 10GE2/0/14
+ description vc5-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702 712
+ stp edged-port enable
 #
 interface 10GE2/0/15
+ description vs1-cl5-172.23.155.80
+ eth-trunk 15
 #
 interface 10GE2/0/16
+ description vs1-cl5-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702 712
+ stp edged-port enable
 #
 interface 10GE2/0/17
+ description vs2-cl5-172.23.155.81
+ eth-trunk 17
 #
 interface 10GE2/0/18
+ description vs2-cl5-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702 712
+ stp edged-port enable
 #
 interface 10GE2/0/19
+ description vs1-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702 712
+ stp edged-port enable
 #
 interface 10GE2/0/20
+ description vs3-cl1-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702 712
+ stp edged-port enable
 #
 interface 10GE2/0/21
  description dell3020-iscsi-2-1-top
@@ -453,10 +551,20 @@ interface 10GE2/0/24
  stp disable
 #
 interface 10GE2/0/25
+ description dell-unity380-iscs1-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
 #
 interface 10GE2/0/26
+ description dell-unity380-iscs1-2
+ port link-type trunk
+ port trunk allow-pass vlan 702
 #
 interface 10GE2/0/27
+ description vs1-cl4-iscsi-2
+ port link-type trunk
+ port trunk allow-pass vlan 702 712
+ stp edged-port enable
 #
 interface 10GE2/0/28
 #
@@ -470,7 +578,8 @@ interface 10GE2/0/32
 #
 interface 10GE2/0/33
  description server_1c-srv2
- eth-trunk 33
+ shutdown
+ port default vlan 100
 #
 interface 10GE2/0/34
  description server_1c-db
@@ -612,6 +721,7 @@ user-interface con 0
 user-interface vty 0 4
  authentication-mode aaa
  user privilege level 3
+ idle-timeout 120 0
  protocol inbound ssh
 #
 netconf
